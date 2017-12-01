@@ -7,80 +7,80 @@
 
 ## Attributes
 
-### BLANK : 0 (constant)
+- BLANK : 0 (constant)
 
-### NOT_MOVED : None (constant)
+- NOT_MOVED : None (constant)
 
-### width : 7 (constant)
+- width : 7 (constant)
 
-Board width
+    Board width
 
-### height : 7 (constant)
+- height : 7 (constant)
 
-Board height
+    Board height
 
-### active_player : hashable
+- active_player : hashable
 
-Reference to a hashable object registered as a player with the initiative to move on the current board
+    Reference to a hashable object registered as a player with the initiative to move on the current board
 
-### inactive_player : hashable
+- inactive_player : hashable
 
-Reference to a hashable object registered as a player awaiting initiative to move on the current board
+    Reference to a hashable object registered as a player awaiting initiative to move on the current board
 
-### move_count : int
+- move_count : int
 
-Counter indicating the number of moves that have been applied to the game
+    Counter indicating the number of moves that have been applied to the game
 
 ## Public Methods
 
-### apply_move(self, move)
-    
-Modify the game object by moving the active player on the game board and disabling the vacated square (if any). The forecast_move method performs the same function, but returns a copy of the board, rather than modifying the state in-place.
+- apply_move(self, move)
 
-### copy(self)
+    Modify the game object by moving the active player on the game board and disabling the vacated square (if any). The forecast_move method performs the same function, but returns a copy of the board, rather than modifying the state in-place.
 
-Return a new Board object that is a copy of the current game state
+- copy(self)
 
-### forecast_move(self, move)
+    Return a new Board object that is a copy of the current game state
 
-Equivalent to apply_move, but returns a copy of the board rather than modifying the state in-place.
+- forecast_move(self, move)
 
-### get_blank_spaces(self)
+    Equivalent to apply_move, but returns a copy of the board rather than modifying the state in-place.
 
-Returns a list of tuples identifying the blank squares on the current board
+- get_blank_spaces(self)
 
-### get_legal_moves(self, player=None)
+    Returns a list of tuples identifying the blank squares on the current board
 
-Returns a list of tuples identifying the legal moves for the specified player
+- get_legal_moves(self, player=None)
 
-### get_opponent(self, player)
+    Returns a list of tuples identifying the legal moves for the specified player
 
-Returns the opponent of the specified player
+- get_opponent(self, player)
 
-### get_player_location(self, player)
+    Returns the opponent of the specified player
 
-Returns a tuple (x, y) identifying the location of the specified player on the game board, or None of the player is a registered agent in the game but has not yet been placed on the board. Raises a RuntimeError if the specified player is not registered on the board.
+- get_player_location(self, player)
 
-### hash(self)
+    Returns a tuple (x, y) identifying the location of the specified player on the game board, or None of the player is a registered agent in the game but has not yet been placed on the board. Raises a RuntimeError if the specified player is not registered on the board.
 
-Return a hash of the current state (public alias of __hash__ method). The hashed state includes occupied cells, current player locations, and which player has initiative on the board. An equivalent hash function can be added to the isolation.Board class from the isolation project:
+- hash(self)
 
-### is_loser(self, player)
+    Return a hash of the current state (public alias of __hash__ method). The hashed state includes occupied cells, current player locations, and which player has initiative on the board. An equivalent hash function can be added to the isolation.Board class from the isolation project:
 
-Returns True if the specified player has lost the game in the current state, and False otherwise
+- is_loser(self, player)
 
-### is_winner(self, player)
+    Returns True if the specified player has lost the game in the current state, and False otherwise
 
-Returns True if the specified player has won the game in the current state, and False otherwise
+- is_winner(self, player)
 
-### move_is_legal(self, move)
+    Returns True if the specified player has won the game in the current state, and False otherwise
 
-Returns True if the active player can legally make the specified move and False otherwise
+- move_is_legal(self, move)
 
-### to_string(self, symbols=['1', '2'])
+    Returns True if the active player can legally make the specified move and False otherwise
 
-Return a string representation of the current board position
+- to_string(self, symbols=['1', '2'])
 
-### utility(self, player)
+    Return a string representation of the current board position
 
-Returns a floating point value: +inf if the specified player has won the game, -inf if the specified player has lost the game, and 0 otherwise.
+- utility(self, player)
+
+    Returns a floating point value: +inf if the specified player has won the game, -inf if the specified player has lost the game, and 0 otherwise.
