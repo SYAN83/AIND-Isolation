@@ -298,13 +298,11 @@ class Board(object):
     def play(self, time_limit=TIME_LIMIT_MILLIS):
         """Execute a match between the players by alternately soliciting them
         to select a move and applying it in the game.
-
         Parameters
         ----------
         time_limit : numeric (optional)
             The maximum number of milliseconds to allow before timeout
             during each turn.
-
         Returns
         ----------
         (player, list<[(int, int),]>, str)
@@ -322,7 +320,7 @@ class Board(object):
             game_copy = self.copy()
 
             move_start = time_millis()
-            time_left = lambda : time_limit - (time_millis() - move_start)
+            time_left = lambda: time_limit - (time_millis() - move_start)
             curr_move = self._active_player.get_move(game_copy, time_left)
             move_end = time_left()
 
@@ -340,3 +338,9 @@ class Board(object):
             move_history.append(list(curr_move))
 
             self.apply_move(curr_move)
+
+    def get_winner(self):
+        return 'Winner: Player 1' if self.inactive_player == self._player_1 else 'Winner: Player 2'
+
+if __name__ == '__main__':
+    pass

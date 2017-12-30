@@ -194,7 +194,7 @@ class GreedyPlayer():
         """
         legal_moves = game.get_legal_moves()
         if not legal_moves:
-            return (-1, -1)
+            return -1, -1
         _, move = max([(self.score(game.forecast_move(m), self), m) for m in legal_moves])
         return move
 
@@ -287,3 +287,4 @@ if __name__ == "__main__":
     print("\nWinner: {}\nOutcome: {}".format(winner, outcome))
     print(game.to_string())
     print("Move history:\n{!s}".format(history))
+
