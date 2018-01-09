@@ -23,7 +23,7 @@ from sample_players import (RandomPlayer, GreedyPlayer,
 from game_agent import (MinimaxPlayer, AlphaBetaPlayer, custom_score,
                         custom_score_2, custom_score_3)
 
-NUM_MATCHES = 20  # number of matches against each opponent
+NUM_MATCHES = 10  # number of matches against each opponent
 TIME_LIMIT = 150  # number of milliseconds before timeout
 
 DESCRIPTION = """
@@ -129,12 +129,11 @@ def main():
     # Define two agents to compare -- these agents will play from the same
     # starting position against the same adversaries in the tournament
     test_agents = [
-        Agent(RandomPlayer(), "Random"),
         # Agent(MinimaxPlayer(score_fn=improved_score), "MM_Improved"),
-        # Agent(MinimaxPlayer(score_fn=custom_score, search_depth=3), "MM_Custom_1"),
+        Agent(MinimaxPlayer(score_fn=custom_score), "MM_Custom"),
+        Agent(MinimaxPlayer(score_fn=custom_score_2), "MM_Custom_2"),
         # Agent(MinimaxPlayer(score_fn=custom_score_2, search_depth=3), "MM_Custom_2"),
-        # Agent(MinimaxPlayer(score_fn=custom_score_2, search_depth=3), "MM_Custom_2"),
-        # Agent(AlphaBetaPlayer(score_fn=custom_score), "AB_Custom"),
+        Agent(AlphaBetaPlayer(score_fn=custom_score), "AB_Custom"),
         # Agent(AlphaBetaPlayer(score_fn=custom_score_2), "AB_Custom_2"),
         # Agent(AlphaBetaPlayer(score_fn=custom_score_3), "AB_Custom_3")
     ]

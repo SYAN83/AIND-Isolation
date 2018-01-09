@@ -2,8 +2,6 @@
 test your agent's strength against a set of known agents using tournament.py
 and include the results in your report.
 """
-import random
-from functools import partial
 
 
 class SearchTimeout(Exception):
@@ -80,14 +78,14 @@ def custom_score_2(game, player):
 
     legal_moves = set()
     for m in game.get_legal_moves():
-        legal_moves.update(game.forecast_move(m).get_legal_moves(player))
-    for m in game.get_legal_moves():
-        legal_moves = legal_moves.difference(game.forecast_move(m).get_legal_moves())
+        legal_moves.update(game.forecast_move(m).get_legal_moves())
+    # for m in game.get_legal_moves():
+    #     legal_moves = legal_moves.difference(game.forecast_move(m).get_legal_moves())
 
-    return float(len(legal_moves))
+    return -float(len(legal_moves))
 
 
-def custom_score_3(game, player, depth):
+def custom_score_3(game, player):
     """Calculate the heuristic value of a game state from the point of view
     of the given player.
 
@@ -110,29 +108,7 @@ def custom_score_3(game, player, depth):
         The heuristic value of the current game state to the specified player.
     """
     # TODO: finish this function!
-    def terminate(game):
-        return game.get_legal_moves() == []
-
-    def min_value(game, depth):
-        if terminate(game):
-            return float('inf')
-        elif depth == 0:
-            return len(game.get_legal_moves())
-        else:
-            for m in game.get_legal_moves():
-                pass
-
-    def max_value(game, depth):
-        if terminate(game=game):
-            return float('-inf')
-
-        elif depth == 0:
-            return len(game.get_legal_moves())
-        else:
-            for m in game.get_legal_moves():
-                pass
-
-    return min_value(game=game, depth=depth)
+    pass
 
 
 class IsolationPlayer:
@@ -162,11 +138,6 @@ class IsolationPlayer:
         self.score = score_fn
         self.time_left = None
         self.TIMER_THRESHOLD = timeout
-
-    def __str__(self):
-        return 'Player: {} - Scoring: {} - Depth: {}'.format(self.__class__.__name__,
-                                                             self.score.__name__,
-                                                             self.search_depth)
 
     @staticmethod
     def _terminal_test(game, depth):
