@@ -40,11 +40,7 @@ def custom_score(game, player):
     if game.is_winner(player):
         return float("inf")
 
-    legal_moves = set()
-    for m in game.get_legal_moves():
-        legal_moves.update(game.forecast_move(m).get_legal_moves(player))
-
-    return float(len(legal_moves))
+    return heuristic3(game=game, player=player)
 
 
 def custom_score_2(game, player):
@@ -76,13 +72,7 @@ def custom_score_2(game, player):
     if game.is_winner(player):
         return float("inf")
 
-    legal_moves = set()
-    for m in game.get_legal_moves():
-        legal_moves.update(game.forecast_move(m).get_legal_moves())
-    # for m in game.get_legal_moves():
-    #     legal_moves = legal_moves.difference(game.forecast_move(m).get_legal_moves())
-
-    return -float(len(legal_moves))
+    return heuristic3(game=game, player=player) / (1 - heuristic2(game=game, player=player))
 
 
 def custom_score_3(game, player):
@@ -108,7 +98,31 @@ def custom_score_3(game, player):
         The heuristic value of the current game state to the specified player.
     """
     # TODO: finish this function!
-    pass
+    if game.is_loser(player):
+        return float("-inf")
+
+    if game.is_winner(player):
+        return float("inf")
+
+    return heuristic3(game=game, player=player) * 4 + heuristic2(game=game, player=player)
+
+
+def heuristic1(game, player):
+    return float(len(game.get_legal_moves()))
+
+
+def heuristic2(game, player):
+    legal_moves = list()
+    for m in game.get_legal_moves():
+        legal_moves.extend(game.forecast_move(m).get_legal_moves())
+    return -float(len(legal_moves))
+
+
+def heuristic3(game, player):
+    legal_moves = list()
+    for m in game.get_legal_moves():
+        legal_moves.extend(game.forecast_move(m).get_legal_moves(player))
+    return float(len(legal_moves))
 
 
 class IsolationPlayer:
